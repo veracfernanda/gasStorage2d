@@ -1,0 +1,41 @@
+vti:
+  file:  geometry-v0hor.vti      # relative to run.py, or give an absolute path
+  array: "Tiff Scalars"
+
+slurm:
+  job_name:        OpenLB_Gas
+  partition:       c23ms
+  nodes:           1
+  ntasks:          10
+  ntasks_per_node: 10
+  time:            "5:00:00"
+  mem_per_cpu:     3900M
+  modules:
+    - module load GCC/13.2.0
+    - module load OpenMPI/5.0.1
+
+params:
+  inlet_length_frac:   0.1         # length of inlet region
+  outlet_length_frac:  0.5         # length of outlet region
+  scaling_factor:      4.0e-7      # scale down
+  pressure_drop:       2000.0      # [N.m-2]
+  inlet_velocity:      0.015       # [m/s], left velocity inlet
+  ramp_iterations:     10000
+  density_gas:         1.1         # H2 @ 100 bar [kg.m-3]
+  density_liquid:      971.78      # water [kg.m-3]
+  viscosity_gas:       2.11818e-5  # [m2.s-1]
+  viscosity_liquid:    4.11616e-7  # [m2.s-1]
+  surface_tension:     6.25e-2     # [N.m-1]
+  contact_angle_deg:   45.0        # Contact angle
+  resolution:          1000
+  tau_liquid:          0.52        # lattice relaxation time
+  lattice_density_div: 500.0
+  interface_thickness: 6.0         # interface thickness [l.u.]
+  tau_mobil:           0.8         # relaxation time order parameter [l.u.]
+  tau_minus:           1.5         # TRT antisymmetric relaxation time [l.u.]
+  psi_deltat:          0.7         # SDF reinit pseudo-timestep [l.u.]
+  sdf_interval:        100         # steps between SDF reinit in main loop
+  max_phys_time:       0.03        # max simulation time [s]
+  vtk_iter:            3.0e-6      # write simulation output [s]
+  stat_iter:           3.0e-6      # simulation statistics time [s]
+  output_dir:          /hpcwork/tr420207/ITV-Seminar/01-Run/gas-case/
